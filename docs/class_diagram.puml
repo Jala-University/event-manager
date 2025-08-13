@@ -1,0 +1,47 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Event {
+  - name: String
+  - processingTime: int
+  - processed: boolean
+  + Event(name: String, processingTime: int)
+  + getName(): String
+  + getProcessingTime(): int
+  + isProcessed(): boolean
+  + setProcessed(processed: boolean): void
+  + equals(o: Object): boolean
+  + hashCode(): int
+  + toString(): String
+}
+
+class EventManager {
+  - allEvents: Set<Event>
+  - eventQueue: Queue<Event>
+  - processedEvents: Set<Event>
+  + addEvent(event: Event): boolean
+  + getQueuedEvents(): Set<Event>
+  + getNextEvent(): Event
+  + dequeueEvent(): Event
+  + getProcessedEvents(): Set<Event>
+}
+
+class EventProcessor {
+  + processEvent(event: Event): void
+}
+
+class EventManagerApp {
+  - eventManager: EventManager
+  - scanner: Scanner
+  + main(args: String[]): void
+  - printMenu(): void
+  - addEvent(): void
+  - viewQueuedEvents(): void
+  - processEvent(): void
+  - viewProcessedEvents(): void
+}
+
+EventManager "1" *-- "many" Event
+EventManagerApp "1" --> "1" EventManager
+EventManagerApp --> EventProcessor
+@enduml

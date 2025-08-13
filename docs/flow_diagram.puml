@@ -1,0 +1,40 @@
+@startuml
+start
+:Initialize EventManager;
+
+while (running?) is (yes)
+  :Show Menu;
+  :Get User Input;
+
+  if (Input == 1?) then (yes)
+    :Add Event;
+    :Prompt for event details;
+    :Add to EventManager;
+  elseif (Input == 2?) then (yes)
+    :View Queued;
+    :Retrieve queued events;
+    :Display events;
+  elseif (Input == 3?) then (yes)
+    :Process Event;
+    if (Event exists?) then (yes)
+      :Process event;
+      :Mark as processed;
+      :Add to processed events;
+    else (no)
+      :Show "No events";
+    endif
+  elseif (Input == 4?) then (yes)
+    :View Processed;
+    :Retrieve processed events;
+    :Display events;
+  elseif (Input == 5?) then (yes)
+    :Exit;
+    :running = false;
+  else (no)
+    :Invalid input;
+  endif
+endwhile
+
+:Exit program;
+stop
+@enduml
